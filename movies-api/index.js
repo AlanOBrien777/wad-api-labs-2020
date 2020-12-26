@@ -3,7 +3,9 @@ import express from 'express';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
-import {loadUsers} from './seedData'
+import {loadUsers} from './seedData';
+import usersRouter from './api/users';
+
 
 dotenv.config();
 
@@ -26,6 +28,7 @@ if (process.env.SEED_DB) {
 
 app.use(express.static('public'));
 app.use('/api/movies', moviesRouter);
+app.use('/api/users', usersRouter);
 //configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
