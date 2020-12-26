@@ -6,7 +6,7 @@ import './db';
 import {loadUsers} from './seedData';
 import usersRouter from './api/users';
 import session from 'express-session';
-import authenticate from './authenticate';
+import passport from './authenticate';
 
 
 dotenv.config();
@@ -30,11 +30,14 @@ if (process.env.SEED_DB) {
 
 app.use(express.static('public'));
 app.use('/api/users', usersRouter);
-app.use('/api/movies', authenticate, moviesRouter);
+//app.use('/api/movies', authenticate, moviesRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 //configure body-parser
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(bodyParser.urlencoded());
 app.use(errHandler);
+
 //session middleware
 app.use(session({
     secret: 'ilikecake',
