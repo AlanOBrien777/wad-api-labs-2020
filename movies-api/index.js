@@ -3,7 +3,7 @@ import express from 'express';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
-import {loadUsers} from './seedData';
+import {loadUsers, loadMovies} from './seedData';
 import usersRouter from './api/users';
 import session from 'express-session';
 import passport from './authenticate';
@@ -26,6 +26,7 @@ const port = process.env.PORT;
 
 if (process.env.SEED_DB) {
     loadUsers();
+    loadMovies();
   }
 
 app.use(express.static('public'));
