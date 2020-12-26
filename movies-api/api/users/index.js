@@ -7,6 +7,7 @@ const router = express.Router(); // eslint-disable-line
 router.get('/', (req, res) => {
     User.find().then(users =>  res.status(200).json(users));
 });
+
 //get favs
 router.get('/:userName/favourites', (req, res, next) => {
     const user = req.params.userName;
@@ -19,6 +20,7 @@ router.get('/:userName/favourites', (req, res, next) => {
 router.post('/', (req, res ,next) => {
     User.create(req.body).then(user => res.status(200).json({success:true,token:"FakeTokenForNow"})).catch(next);
 });
+
 //post favs
 router.post('/:userName/favourites', (req, res, next) => {
     const newFavourite = req.body;
