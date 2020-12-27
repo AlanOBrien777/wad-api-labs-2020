@@ -3,6 +3,7 @@ import {
   getMovies, getMovie, getMovieReviews, getGenres
 } from '../tmdb-api';
 import movieModel from '..//movies/movieModel';
+import userModel from '..//users/userModel';
 
 const router = express.Router();
 
