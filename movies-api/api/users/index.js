@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
     });
   } else {
     const user = await User.findByUserName(req.body.username).catch(next);
-      if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found.' });
+      if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found. Or invalid Password' });
       user.comparePassword(req.body.password, (err, isMatch) => {
         if (isMatch && !err) {
           // if user is found and password is right create a token
